@@ -1,4 +1,4 @@
-use clap::{App, AppSettings, SubCommand, Arg};
+use clap::{App, AppSettings, Arg, SubCommand};
 
 #[macro_use]
 extern crate clap;
@@ -11,13 +11,19 @@ fn main() {
         .subcommand(
             SubCommand::with_name("extract")
                 .about("Extract data as csv files")
-                .arg(Arg::from_usage("-c --config <FILE> 'configuration file required'"))
-                .arg(Arg::from_usage("-o --out [PATH] 'set output path (default: current)'"))
+                .arg(Arg::from_usage(
+                    "-c --config <FILE> 'configuration file required'",
+                ))
+                .arg(Arg::from_usage(
+                    "-o --out [PATH] 'set output path (default: current)'",
+                )),
         )
         .subcommand(
             SubCommand::with_name("validate")
                 .about("Run your validations")
-                .arg(Arg::from_usage("-c --config <FILE> 'configuration file required'"))
+                .arg(Arg::from_usage(
+                    "-c --config <FILE> 'configuration file required'",
+                )),
         )
         .get_matches();
 
