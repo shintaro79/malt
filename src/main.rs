@@ -12,17 +12,17 @@ fn main() {
             SubCommand::with_name("extract")
                 .about("Extract data as csv files")
                 .arg(Arg::from_usage(
-                    "-c --config <FILE> 'configuration file required'",
+                    "-c --config <FILE> 'Configuration file required'",
                 ))
                 .arg(Arg::from_usage(
-                    "-o --out [PATH] 'set output path (default: current)'",
+                    "-o --output [PATH] 'Set output path (default: current)'",
                 )),
         )
         .subcommand(
             SubCommand::with_name("validate")
                 .about("Run your validations")
                 .arg(Arg::from_usage(
-                    "-c --config <FILE> 'configuration file required'",
+                    "-c --config <FILE> 'Configuration file required'",
                 )),
         )
         .get_matches();
