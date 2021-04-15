@@ -1,28 +1,35 @@
-use clap::{App, AppSettings, SubCommand};
+use clap::{App, AppSettings, SubCommand, Arg};
 
 #[macro_use]
 extern crate clap;
 
 fn main() {
-    let options = App::new(crate_name!())
+    let args = App::new(crate_name!())
         .about(crate_description!())
         .version(crate_version!())
         .setting(AppSettings::SubcommandRequiredElseHelp)
         .subcommand(
             SubCommand::with_name("extract")
                 .about("Extract data as csv files")
+                .arg(Arg::from_usage("-c --config <FILE> 'configuration file required'"))
+                .arg(Arg::from_usage("-o --out [PATH] 'set output path (default: current)'"))
         )
         .subcommand(
             SubCommand::with_name("validate")
                 .about("Run your validations")
-        );
+                .arg(Arg::from_usage("-c --config <FILE> 'configuration file required'"))
+        )
+        .get_matches();
 
-    let matchers = options.get_matches();
-    match matchers.subcommand() {
-        ("extract", sub_match) => {
+    match args.subcommand() {
+        ("extract", Some(sub_args)) => {
+            let config = sub_args.value_of("config").unwrap();
+            println!("config file: {}", config);
             unimplemented!();
         }
-        ("validate", sub_match) => {
+        ("validate", Some(sub_args)) => {
+            let config = sub_args.value_of("config").unwrap();
+            println!("config file: {}", config);
             unimplemented!();
         }
         _ => unreachable!(),
